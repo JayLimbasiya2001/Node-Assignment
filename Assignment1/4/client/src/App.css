@@ -1,0 +1,155 @@
+body,
+html {
+  padding: 0;
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.App {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  max-height: 100vh;
+  background-color: rgb(22, 19, 19);
+}
+
+.logIn {
+  height: 45%;
+  width: 70%;
+  border: 2px solid aquamarine;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logIn input {
+  margin: 10px;
+  width: 160px;
+  height: 40px;
+  border: 1px solid aquamarine;
+  background: transparent;
+  color: wheat;
+  font-size: 14px;
+  border-radius: 7px;
+}
+
+.logIn input:focus {
+  outline: none;
+}
+
+.logIn button {
+  width: 130px;
+  height: 35px;
+  border: 1px solid aquamarine;
+  background: transparent;
+  color: wheat;
+  border-radius: 6px;
+  font-weight: bold;
+  margin-top: 25px;
+  outline: none;
+}
+
+.logIn button:hover {
+  background-color: aquamarine;
+  color: black;
+  cursor: pointer;
+}
+
+.logIn h2 {
+  margin: 0;
+  color: aqua;
+}
+
+.inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.chatContainer {
+  height: 400px;
+  max-height: 400px;
+  width: 70%;
+  border: 2px solid aquamarine;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(22, 19, 19);
+}
+
+.chatContainer .messages {
+  flex: 90%;
+  width: 100%;
+  background-color: rgb(22, 19, 19);
+  border-radius: 7px;
+  overflow: auto;
+}
+
+.chatContainer .messageInputs {
+  flex: 10%;
+  width: 100%;
+  min-width: 100%;
+  background-color: aquamarine;
+  display: flex;
+}
+
+.messageInputs input {
+  flex: 90%;
+  height: calc(100% - 5px);
+  outline: none;
+  border-top: 5px solid aquamarine;
+  border-radius: 6px;
+  border: none;
+  margin: auto;
+}
+
+.messageInputs button {
+  flex: 10%;
+  outline: none;
+  border-top: 5px solid aquamarine;
+  border: none;
+  background-color: aquamarine;
+  font-weight: bold;
+}
+
+.messageContainer {
+  display: flex;
+}
+
+#You {
+  justify-content: flex-end;
+}
+
+#Other {
+  justify-content: flex-start;
+}
+
+#Other .messageIndividual {
+  background-color: bisque;
+  padding: 3px;
+  margin: 6px;
+  font-size: 16px;
+  max-width: 50%;
+  word-break: break-all;
+  border-radius: 6px;
+}
+
+#You .messageIndividual {
+  background-color: aquamarine;
+  padding: 4px;
+  margin: 6px;
+  font-size: 16px;
+  max-width: 50%;
+  word-break: break-all;
+  border-radius: 6px;
+}
+h4 {
+  margin: 0;
+  color: brown;
+}

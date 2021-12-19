@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .inner {
+      max-width: 20vw;
+    }
+    #scoredata {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  </style>
+  <body>
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        max-width: 50%;
+        height: 20vh;
+        justify-content: space-around;
+      "
+    >
+      <label for="">Enter Team name between India and South Africa</label>
+      <input type="text" id="team" />
+      <label for="">Enter over number</label>
+      <input type="number" id="overnumber" max="20" min="0" />
+      <button onclick="sendData()">Get Data</button>
+    </div>
+    <h2>Cricket Score Data</h2>
+    <div id="scoredata"></div>
+  </body>
+  <script src="https://cdn.socket.io/4.0.1/socket.io.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    var socket = io().connect("http://localhost:3000");
+
+    function sendData() {
+      var team = $("#team").val();
+      var over = $("#overnumber").val();
+      const cricdata = {
+        team: team,
+        overnumber: over,
+      };
+      console.log(cricdata);
+      socket.emit("getData", cricdata);
+    }
+    socket.on("sendData", function (data) {
+      console.log(data);
+      var score = "";
+      if (data.length > 0) {
+        for (let i = 0; i < data.length; i++) {
+          score += `<div class="inner"> <h2>batter : ${data[i].batter}</h2><h2>bowler : ${data[i].bowler} </h2><h2>non_striker : ${data[i].non_striker}</h2><h2>runs :</h2><h2>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;better :${data[i].runs.batter}</h2><h2>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extras :${data[i].runs.extras}</h2><h2>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total :${data[i].runs.total}</h2></div>`;
+        }
+        $("#scoredata").html(score);
+      } else {
+        $("#scoredata").html("<h1>NO DATA FOUND</h1>");
+      }
+      console.log(score);
+    });
+  </script>
+</html>
