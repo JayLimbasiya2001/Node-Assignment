@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table border="1" align="center" width="50%" style="font-size: 40px">
+      <thead>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </thead>
+      <tbody id="studentdata"></tbody>
+    </table>
+    <a href="/logout">Logout</a>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(async function () {
+        try {
+          var res = await fetch("/studentdata", {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          });
+          var data = await res.json();
+          var value = "";
+          data.data.forEach((element) => {
+            value += ` <tr>
+                    <td align="center">${element.firstname}</td>
+                    <td align="center">${element.lastname}</td>
+                    <td align="center">${element.email}</td>
+                    <td align="center">${element.password}</td>
+                    <td align="center"><a href="/edit/${element._id}">Edit</a></td>
+                    <td align="center"><a href="/delete/${element._id}">Delete</a></td>
+                    </tr>`;
+          });
+          $("#studentdata").append(value);
+        } catch (err) {
+          console.log(err);
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>Edit Student</h3>
+    <form action="/edit" method="post">
+      <input type="hidden" name="_id" id="_id" value="" />
+      First Name :
+      <input type="text" name="firstname" id="firstname" value="" />
+      <br /><br />
+      Last Name :
+      <input type="text" name="lastname" id="lastname" value="" />
+      <br /><br />
+      Email :<input type="text" name="email" id="email" value="" /> <br /><br />
+      <input type="submit" value="Edit" />
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      let param = window.location.href.split("/");
+      var _id = param.slice(-1)[0];
+      $(document).ready(async function () {
+        var res = await fetch("/editstudent", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ _id: _id }),
+        });
+
+        var data = await res.json();
+        $("#_id").val(_id);
+        $("#firstname").val(data.data.firstname);
+        $("#lastname").val(data.data.lastname);
+        $("#email").val(data.data.email);
+      });
+    </script>
+  </body>
+</html>
